@@ -5,6 +5,9 @@ from django.contrib.auth.models import AbstractUser
 class TaskType(models.Model):
     name = models.CharField(max_length=64)
 
+    def __str__(self) -> str:
+        return f"{self.name}"
+
 
 class Task(models.Model):
     PRIORITY_CHOICE_LIST = [
@@ -23,6 +26,9 @@ class Task(models.Model):
         null=True)
     assignees = models.ManyToManyField("Worker", related_name="tasks")
 
+    def __str__(self) -> str:
+        return f"{self.name}"
+
 
 class Worker(AbstractUser):
     position = models.ForeignKey(
@@ -32,6 +38,12 @@ class Worker(AbstractUser):
         null=True
     )
 
+    def __str__(self) -> str:
+        return f"{self.username}: ({self.position})"
+
 
 class Position(models.Model):
     name = models.CharField(max_length=64)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
