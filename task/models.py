@@ -28,7 +28,8 @@ class Worker(AbstractUser):
     position = models.ForeignKey(
         "Position",
         related_name="workers",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True
     )
 
 
