@@ -1,0 +1,61 @@
+[
+  {
+    "model": "task.position",
+    "pk": 1,
+    "fields": {
+      "name": "Python Developer"
+    }
+  },
+  {
+    "model": "task.position",
+    "pk": 2,
+    "fields": {
+      "name": "Project Manager"
+    }
+  },
+  {
+    "model": "task.worker",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$randomhash",
+      "is_superuser": false,
+      "username": "johndoe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z",
+      "position": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "task.tasktype",
+    "pk": 1,
+    "fields": {
+      "name": "Bug Fix"
+    }
+  },
+  {
+    "model": "task.tasktype",
+    "pk": 2,
+    "fields": {
+      "name": "New Feature"
+    }
+  },
+  {
+    "model": "task.task",
+    "pk": 1,
+    "fields": {
+      "name": "Fix Login Bug",
+      "description": "Users cannot login with Google OAuth.",
+      "deadline": "2026-04-15",
+      "is_completed": false,
+      "priority": "Urgent",
+      "task_type": 1,
+      "assignees": [1]
+    }
+  }
+]
