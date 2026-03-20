@@ -25,7 +25,7 @@ class TaskListView(LoginRequiredMixin, ListView):
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
-    ...
+    model = Task
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
