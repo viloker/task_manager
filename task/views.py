@@ -10,6 +10,8 @@ from django.views.generic import (
 
 from django.shortcuts import render
 
+from .models import Task
+
 
 @login_required
 def index(request):
@@ -17,7 +19,9 @@ def index(request):
 
 
 class TaskListView(LoginRequiredMixin, ListView):
-    ...
+    model = Task
+    template_name = "task/task_list.html"
+    paginate_by = 10
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):

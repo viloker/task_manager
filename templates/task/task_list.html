@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Tasks</h1>
+
+{% for task in task_list %}
+
+  <p><a href="#">{{ task.name }}</a></p>
+  <p>{{ task.is_completed }}</p>
+  <p>{{ priority }}</p>
+  <p>{{ task.deadline }</p>
+
+{% empty %}
+  <h3>We don't have any tasks.</h3>
+{% endfor%}
+
+{% endblock %}
