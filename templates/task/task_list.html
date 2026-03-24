@@ -9,7 +9,7 @@
   <p><a href="{% url 'task:task-detail' pk=task.id %}">{{ task.name }}</a></p>
   <p>{{ task.is_completed }}</p>
   <p>{{ priority }}</p>
-  <p>{{ task.deadline }</p>
+  <p>{{ task.deadline }}</p>
 
 {% empty %}
   <h3>We don't have any tasks.</h3>
