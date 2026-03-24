@@ -38,7 +38,10 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
-    ...
+    model = Task
+    success_url = reverse_lazy("task:task-list")
+    form_class = TaskForm
+    template_name = "task/task_create.html"
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
