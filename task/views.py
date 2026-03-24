@@ -9,8 +9,10 @@ from django.views.generic import (
 )
 
 from django.shortcuts import render
+from django.urls import reverse_lazy
 
 from .models import Task
+from .forms import TaskForm
 
 
 @login_required
@@ -29,7 +31,10 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
-    ...
+    model = Task
+    success_url = reverse_lazy("task:task-list")
+    form_class = TaskForm
+    template_name = "task/task_create.html"
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
