@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 from .models import Task, Worker
-from .forms import TaskForm
+from .forms import TaskForm, WorkerForm
 
 
 @login_required
@@ -57,11 +57,14 @@ class WorkerListView(LoginRequiredMixin, ListView):
 
 
 class WorkerDetailView(LoginRequiredMixin, DetailView):
-    ...
+    model = Worker
 
 
 class WorkerCreateView(LoginRequiredMixin, CreateView):
-    ...
+    model = Worker
+    template_name = "task/worker_create.html"
+    success_url = reverse_lazy("task:worker-list")
+    form_class = WorkerForm
 
 
 class WorkerUpdateView(LoginRequiredMixin, UpdateView):
