@@ -11,7 +11,7 @@ from django.views.generic import (
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
-from .models import Task
+from .models import Task, Worker
 from .forms import TaskForm
 
 
@@ -48,3 +48,19 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy("task:task-list")
     template_name = "task/task_delete.html"
+
+
+class WorkerListView(LoginRequiredMixin, ListView):
+    ...
+
+
+class WorkerDetailView(LoginRequiredMixin, DetailView):
+    ...
+
+
+class WorkerCreateView(LoginRequiredMixin, CreateView):
+    ...
+
+
+class WorkerDeleteView(LoginRequiredMixin, DeleteView):
+    ...
