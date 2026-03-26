@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Worker list</h2>
+{% for worker in worker_list %}
+  <ul>
+    <li>{{ worker.username }} ({{worker.first_name}} {{worker.last_name}})</li>
+    <li>Position: {{worker.position}}</li>
+  </ul>
+
+  <h3>Task:</h3>
+  {% for task in worker.tasks.all %}
+    <p>{{task.name}}</p>
+  {% empty %}
+    <p>{{worker.username}} don't have any activity tasks.</p>
+  {% endfor %}
+
+{% empty %}
+<h4>We don't have any workers.</h4>
+{% endfor %}
+
+{% endblock %}

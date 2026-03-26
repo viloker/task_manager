@@ -51,7 +51,9 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class WorkerListView(LoginRequiredMixin, ListView):
-    ...
+    model = Worker
+    template_name = "task/worker_list.html"
+    paginate_by = 10
 
 
 class WorkerDetailView(LoginRequiredMixin, DetailView):
@@ -61,8 +63,10 @@ class WorkerDetailView(LoginRequiredMixin, DetailView):
 class WorkerCreateView(LoginRequiredMixin, CreateView):
     ...
 
+
 class WorkerUpdateView(LoginRequiredMixin, UpdateView):
     ...
+
 
 class WorkerDeleteView(LoginRequiredMixin, DeleteView):
     ...
