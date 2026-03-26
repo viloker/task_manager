@@ -24,7 +24,7 @@ urlpatterns = [
     path("workers/", WorkerListView.as_view(), name="worker-list"),
     path("worker/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"),
     path("worker/create/", WorkerCreateView.as_view(), name="worker-create"),
-    path("worker/<int:pk>/update", WorkerUpdateView.as_view(), name="worker-update"),
+    path("worker/<int:pk>/update/", WorkerUpdateView.as_view(), name="worker-update"),
     path("worker/<int:pk>/delete/", WorkerDeleteView.as_view(), name="worker-delete"),
 
 ]
