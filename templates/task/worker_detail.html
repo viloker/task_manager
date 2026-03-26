@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Worker: {{worker.username}}</h2>
+
+<p>Full name: {{worker.first_name}} {{worker.last_name}}</p>
+<p>Position: {{worker.position}}</p>
+<p>Tasks:</p>
+{% for task in worker.tasks.all %}
+  <p>{{task.name}}</p>
+{% empty %}
+  <p>{{worker.username}} don't have any activity tasks.</p>
+{% endfor %}
+
+{% endblock %}
