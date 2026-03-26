@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>
-    {% block title %}
-    {%endblock %}
+    {% block title %}Task manager{%endblock %}
   </title>
 </head>
 <body>
+<header>
+  <h1>Task manager</h1>
+  <ul>
+    <li><a href="{% url 'task:index' %}">Home</a></li>
+    <li><a href="{% url 'task:task-list' %}">Tasks</a></li>
+    <li><a href="#">Workers</a></li>
+    <li><a href="#">Positions</a></li>
+  </ul>
+</header>
 {% block content %}
 {% endblock %}
 </body>
