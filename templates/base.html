@@ -8,9 +8,11 @@
 </head>
 <body>
 
+{% if user.is_authenticated %}
 {% block header %}
 {% include "includes/header.html" %}
 {% endblock %}
+{% endif %}
 
 {% block content %}
 {% endblock %}
