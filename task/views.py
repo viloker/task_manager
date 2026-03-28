@@ -17,7 +17,23 @@ from .forms import TaskForm, WorkerForm
 
 @login_required
 def index(request):
-    return render(request, "task/index.html")
+    num_tasks = Task.objects.count()
+    num_done_tasks = Task.objects.filter(is_completed=True).count()
+    num_workers = Worker.objects.count()
+
+    num_urgent_tasks = Task.objects.filter(priority="Urgent", is_completed=False).count()
+
+    context = {
+        "num_tasks": num_tasks,
+        "num_done_tasks": num_done_tasks,
+        "num_workers": num_workers,
+        "num_urgent_tasks": num_urgent_tasks
+    }
+
+    return render(
+        request,
+        "task/index.html",
+        context=context)
 
 
 class TaskListView(LoginRequiredMixin, ListView):

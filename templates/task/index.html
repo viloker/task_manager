@@ -1,5 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-hi
+
+<div>
+  <h1>Task manager</h1>
+</div>
+
+<div>
+  <ul>
+    <li>All tasks: {{num_tasks}}+</li>
+    <li>Completed tasks: {{num_done_tasks}}+</li>
+    <li>Workers: {{num_workers}}</li>
+  </ul>
+  <span>Urgent tasks: {{num_urgent_tasks}}</span>
+</div>
+
+<div>
+  <h2>My tasks:</h2>
+  <ul>
+  {% for task in user.tasks.all %}
+    <li>
+      <a href="{% url 'task:task-detail' pk=task.pk">{{task.name}}</a>
+      <p>{{task.description}}</p>
+      <span>{{task.deadline}}</span>
+    </li>
+
+  {% empty %}
+  </ul>
+  <p>You don't have active tasks yet.</p>
+  {% endfor %}
+</div>
 {% endblock %}
