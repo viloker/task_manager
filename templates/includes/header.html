@@ -1,9 +1,39 @@
-<header>
-  <h1>Task manager</h1>
-  <ul>
-    <li><a href="{% url 'task:index' %}">Home</a></li>
-    <li><a href="{% url 'task:task-list' %}">Tasks</a></li>
-    <li><a href="{% url 'task:worker-list' %}">Workers</a></li>
-    <li><a href="#">Positions</a></li>
-  </ul>
+<header class="navbar navbar-expand-lg bg-body-tertiary">
+
+  <div class="container-fluid">
+
+    <div class="">
+
+      <h1 class="navbar-brand">
+        <a class="btn btn-outline-success" href="{% url 'task:index' %}">Task manager</a>
+      </h1>
+
+    </div>
+
+    <div class="mx-auto">
+
+      <ul class="navbar-nav">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'task:index' %}">Home</a>
+        </li>
+        <li>
+          <a class="nav-link active" href="{% url 'task:task-list' %}">Tasks</a>
+        </li>
+        <li>
+          <a class="nav-link active" href="{% url 'task:worker-list' %}">Workers</a>
+        </li>
+        <li>
+          <a class="nav-link active" href="#">Positions</a>
+        </li>
+
+      </ul>
+    </div>
+    <div class="">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
 </header>
