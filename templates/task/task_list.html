@@ -35,9 +35,6 @@
     <p>{{ task.is_completed }}</p>
     <p>{{ task.priority }}</p>
     <p>{{ task.deadline }}</p>
-    <a href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
-    <a href="{% url 'task:task-update' pk=task.id %}">Update</a>
-    <a>Done</a>
 </div>
 {% empty %}
 
