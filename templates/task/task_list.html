@@ -1,18 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<div>
 <h1>Tasks</h1>
+</div>
+
+<div class="dropdown mb-3">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    Filters
+  </button>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li><a class="dropdown-item" href="#">Completed</a></li>
+    <li><a class="dropdown-item" href="#">Not completed</a></li>
+    <li><a class="dropdown-item" href="{% url 'task:task-list' %}">All tasks</a></li>
+
+    <li><hr class="dropdown-divider"></li>
+
+    {% for val, label in priority_list %}
+      <li><a class="dropdown-item" href="?priority={{ val }}">{{ Label }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
 
 {% for task in task_list %}
-
-  <p><a href="{% url 'task:task-detail' pk=task.id %}">{{ task.name }}</a></p>
-  <p>{{ task.is_completed }}</p>
-  <p>{{ task.priority }}</p>
-  <p>{{ task.deadline }}</p>
-
+<div>
+  <a href="{% url 'task:task-detail' pk=task.id %}">
+    <p>{{ task.name }}</p>
+    <p>{{ task.is_completed }}</p>
+    <p>{{ task.priority }}</p>
+    <p>{{ task.deadline }}</p>
+  </a>
+</div>
 {% empty %}
-  <h3>We don't have any tasks.</h3>
+
+<h3>We don't have any tasks.</h3>
 {% endfor%}
 
 {% endblock %}
