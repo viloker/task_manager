@@ -6,17 +6,15 @@
   <ul>
     <li>{{ worker.username }} ({{worker.first_name}} {{worker.last_name}})</li>
     <li>Position: {{worker.position}}</li>
+    <li>
+      <a href="{% url 'task:worker-detail' pk=worker.id %}">See all information</a>
+    </li>
   </ul>
-
-  <h3>Task:</h3>
-  {% for task in worker.tasks.all %}
-    <p>{{task.name}}</p>
-  {% empty %}
-    <p>{{worker.username}} don't have any activity tasks.</p>
-  {% endfor %}
 
 {% empty %}
 <h4>We don't have any workers.</h4>
 {% endfor %}
+
+<a href="{% url 'task:worker-create' %}">Create new worker</a>
 
 {% endblock %}
