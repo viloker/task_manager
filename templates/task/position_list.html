@@ -3,6 +3,7 @@
 {% block content %}
 {% for position in count_workers %}
 <p>{{position.name}}, workers: {{position.count_workers}}</p>
+<a href="{% url 'task:position-delete' pk=position.id %}">Delete {{position.name}}</a>
 {% endfor %}
 
 <a href="{% url 'task:position-create' %}">Create new position</a>

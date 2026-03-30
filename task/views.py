@@ -124,3 +124,9 @@ class PositionCreateView(LoginRequiredMixin, CreateView):
     model = Position
     fields = "__all__"
     success_url = reverse_lazy("task:position-list")
+
+
+class PositionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Position
+    success_url = reverse_lazy("task:position-list")
+    template_name = "task/position_delete.html"
