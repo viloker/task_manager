@@ -13,7 +13,7 @@ from django.urls import reverse_lazy
 
 from django.db.models import Count
 from .models import Task, Worker, Position
-from .forms import TaskForm, WorkerForm, TaskSearchForm, WorkerSearchForm
+from .forms import TaskForm, WorkerForm, TaskSearchForm, WorkerSearchForm, PositionSearchForm
 
 
 @login_required
@@ -158,9 +158,18 @@ class PositionListView(LoginRequiredMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["count_workers"] = self.model.objects.annotate(count_workers=Count("workers"))
+        context["count_workers"] = self.get_queryset()
+        context["search"] = PositionSearchForm(self.request.GET, None)
 
         return context
+
+    def get_queryset(self):
+        name = self.request.GET.get("name")
+        queryset = self.model.objects.annotate(count_workers=Count("workers"))
+        if name:
+            return queryset.filter(name__icontains=name)
+
+        return queryset
 
 
 class PositionCreateView(LoginRequiredMixin, CreateView):
