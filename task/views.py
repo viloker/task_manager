@@ -23,11 +23,14 @@ def index(request):
 
     num_urgent_tasks = Task.objects.filter(priority="Urgent", is_completed=False).count()
 
+    last_completed_tasks = Task.objects.filter(is_completed=True).order_by("-deadline")[:5]
+
     context = {
         "num_tasks": num_tasks,
         "num_done_tasks": num_done_tasks,
         "num_workers": num_workers,
-        "num_urgent_tasks": num_urgent_tasks
+        "num_urgent_tasks": num_urgent_tasks,
+        "last_completed_tasks": last_completed_tasks
     }
 
     return render(

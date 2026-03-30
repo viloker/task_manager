@@ -16,9 +16,9 @@
 </div>
 
 <div>
-  <h2>My tasks:</h2>
+  <h2>Last completed tasks:</h2>
   <ul>
-  {% for task in user.tasks.all %}
+  {% for task in last_completed_tasks %}
     <li>
       <a href="{% url 'task:task-detail' pk=task.pk">{{task.name}}</a>
       <p>{{task.description}}</p>
@@ -27,7 +27,7 @@
 
   {% empty %}
   </ul>
-  <p>You don't have active tasks yet.</p>
+  <p>We don't have completed task.</p>
   {% endfor %}
 </div>
 {% endblock %}
