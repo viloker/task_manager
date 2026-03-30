@@ -13,4 +13,7 @@
   <p>{{worker.username}} don't have any activity tasks.</p>
 {% endfor %}
 
+<a href="{% url 'task:worker-update' pk=worker.id %}">Update data</a>
+<a href="{% url 'task:worker-delete' pk=worker.id %}">Delete {{worker.username}}</a>
+
 {% endblock %}
