@@ -118,3 +118,9 @@ class PositionListView(LoginRequiredMixin, ListView):
         context["count_workers"] = self.model.objects.annotate(count_workers=Count("workers"))
 
         return context
+
+
+class PositionCreateView(LoginRequiredMixin, CreateView):
+    model = Position
+    fields = "__all__"
+    success_url = reverse_lazy("task:position-list")

@@ -4,4 +4,6 @@
 {% for position in count_workers %}
 <p>{{position.name}}, workers: {{position.count_workers}}</p>
 {% endfor %}
+
+<a href="{% url 'task:position-create' %}">Create new position</a>
 {% endblock %}
