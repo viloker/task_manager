@@ -1,11 +1,17 @@
 from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 
 from .models import Task, Worker
 
 
 class TaskForm(forms.ModelForm):
+    deadline = forms.DateField(widget=forms.SelectDateWidget)
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple)
+
     class Meta:
         model = Task
         fields = "__all__"
@@ -14,7 +20,7 @@ class TaskForm(forms.ModelForm):
 class WorkerForm(UserCreationForm):
     class Meta:
         model = Worker
-        fields = UserCreationForm.Meta.fields + ("position", )
+        fields = UserCreationForm.Meta.fields + ("position",)
 
 
 class TaskSearchForm(forms.Form):
