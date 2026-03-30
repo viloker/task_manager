@@ -13,3 +13,9 @@ class WorkerForm(forms.ModelForm):
     class Meta:
         model = Worker
         fields = ["username", "password"]
+
+
+class TaskSearchForm(forms.Form):
+    name = forms.CharField(max_length=128,
+                           label="Task name",
+                           required=False)

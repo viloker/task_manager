@@ -13,7 +13,7 @@ from django.urls import reverse_lazy
 
 from django.db.models import Count
 from .models import Task, Worker, Position
-from .forms import TaskForm, WorkerForm
+from .forms import TaskForm, WorkerForm, TaskSearchForm
 
 
 @login_required
@@ -45,15 +45,43 @@ class MyTaskListView(LoginRequiredMixin, ListView):
     template_name = "task/my_task.html"
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["search"] = TaskSearchForm(self.request.GET, None)
+
+        return context
+
     def get_queryset(self):
         user = self.request.user
-        return self.model.objects.filter(assignees=user)
+        queryset = self.model.objects.filter(assignees=user)
+
+        name = self.request.GET.get("name")
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+
+        return queryset
 
 
 class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "task/task_list.html"
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["search"] = TaskSearchForm(self.request.GET, None)
+
+        return context
+
+    def get_queryset(self):
+
+        name = self.request.GET.get("name")
+        if name:
+            return self.model.objects.filter(name__icontains=name)
+
+        return super().get_queryset()
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
