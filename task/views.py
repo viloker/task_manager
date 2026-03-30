@@ -43,6 +43,7 @@ def index(request):
 class MyTaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "task/my_task.html"
+    paginate_by = 5
 
     def get_queryset(self):
         user = self.request.user
@@ -52,7 +53,7 @@ class MyTaskListView(LoginRequiredMixin, ListView):
 class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "task/task_list.html"
-    paginate_by = 10
+    paginate_by = 5
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
