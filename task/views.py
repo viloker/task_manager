@@ -13,7 +13,7 @@ from django.urls import reverse_lazy
 
 from django.db.models import Count
 from .models import Task, Worker, Position
-from .forms import TaskForm, WorkerForm, TaskSearchForm
+from .forms import TaskForm, WorkerForm, TaskSearchForm, WorkerSearchForm
 
 
 @login_required
@@ -76,7 +76,6 @@ class TaskListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-
         name = self.request.GET.get("name")
         if name:
             return self.model.objects.filter(name__icontains=name)
@@ -112,6 +111,21 @@ class WorkerListView(LoginRequiredMixin, ListView):
     model = Worker
     template_name = "task/worker_list.html"
     paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["search"] = WorkerSearchForm(self.request.GET, None)
+
+        return context
+
+    def get_queryset(self):
+        username = self.request.GET.get("username")
+
+        if username:
+            return self.model.objects.filter(username__icontains=username)
+
+        return super().get_queryset()
 
 
 class WorkerDetailView(LoginRequiredMixin, DetailView):
