@@ -39,6 +39,15 @@ def index(request):
         context=context)
 
 
+class MyTaskListView(LoginRequiredMixin, ListView):
+    model = Task
+    template_name = "task/my_task.html"
+
+    def get_queryset(self):
+        user = self.request.user
+        return self.model.objects.filter(assignees=user)
+
+
 class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "task/task_list.html"
