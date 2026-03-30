@@ -23,6 +23,10 @@
   </ul>
 </div>
 
+<div>
+   <a href="{% url 'task:task-create' %}">New task</a>
+</div>
+
 {% for task in task_list %}
 <div>
   <a href="{% url 'task:task-detail' pk=task.id %}">
