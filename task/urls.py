@@ -12,7 +12,8 @@ from .views import (
     WorkerDetailView,
     WorkerCreateView,
     WorkerUpdateView,
-    WorkerDeleteView)
+    WorkerDeleteView,
+    PositionListView)
 
 urlpatterns = [
     path("", index, name="index"),
@@ -28,6 +29,8 @@ urlpatterns = [
     path("workers/create/", WorkerCreateView.as_view(), name="worker-create"),
     path("workers/<int:pk>/update/", WorkerUpdateView.as_view(), name="worker-update"),
     path("workers/<int:pk>/delete/", WorkerDeleteView.as_view(), name="worker-delete"),
+
+    path("positions/", PositionListView.as_view(), name="position-list")
 
 ]
 

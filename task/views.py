@@ -11,7 +11,8 @@ from django.views.generic import (
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
-from .models import Task, Worker
+from django.db.models import Count
+from .models import Task, Worker, Position
 from .forms import TaskForm, WorkerForm
 
 
@@ -106,3 +107,14 @@ class WorkerDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy("task:task-list")
     template_name = "task/worker_delete.html"
+
+
+class PositionListView(LoginRequiredMixin, ListView):
+    model = Position
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["count_workers"] = self.model.objects.annotate(count_workers=Count("workers"))
+
+        return context

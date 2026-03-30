@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for position in count_workers %}
+<p>{{position.name}}, workers: {{position.count_workers}}</p>
+{% endfor %}
+{% endblock %}
