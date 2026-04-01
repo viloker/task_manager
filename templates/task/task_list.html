@@ -16,9 +16,13 @@
     <li><a class="dropdown-item" href="{% url 'task:task-list' %}">All tasks</a></li>
 
     <li><hr class="dropdown-divider"></li>
-
-    {% for val, label in priority_list %}
-      <li><a class="dropdown-item" href="?priority={{ val }}">{{ Label }}</a></li>
+    {% for label, value in priority_list %}
+      <li>
+        <a class="dropdown-item"
+           href="{% url 'task:task-list' %}?priority={{ label }}">
+          {{ label }}
+        </a>
+      </li>
     {% endfor %}
   </ul>
 </div>
@@ -26,7 +30,6 @@
 <div>
    <a href="{% url 'task:task-create' %}">New task</a>
 </div>
-
 {% for task in task_list %}
 <div>
   <a href="{% url 'task:task-detail' pk=task.id %}">
