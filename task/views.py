@@ -146,6 +146,8 @@ class WorkerListView(LoginRequiredMixin, ListView):
 class WorkerDetailView(LoginRequiredMixin, DetailView):
     model = Worker
 
+    queryset = Worker.objects.select_related("position").prefetch_related("tasks")
+
 
 class WorkerCreateView(LoginRequiredMixin, CreateView):
     model = Worker
