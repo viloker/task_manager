@@ -55,7 +55,6 @@ class MyTaskListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         queryset = self.model.objects.filter(assignees=user)
-
         name = self.request.GET.get("name")
         if name:
             queryset = queryset.filter(name__icontains=name)
@@ -97,6 +96,8 @@ class TaskListView(LoginRequiredMixin, ListView):
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
+
+    queryset = Task.objects.select_related("task_type").prefetch_related("assignees")
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):

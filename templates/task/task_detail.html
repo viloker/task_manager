@@ -10,6 +10,9 @@
 <p>{{ task.priority }}</p>
 <p>{{ task.task_type }}</p>
 <p>{{ task.assignees }}</p>
+{% for assignee in task.assignees.all %}
+  <p>{{ assignee.username }}</p>
+{% endfor %}
 <a href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
 <a href="{% url 'task:task-update' pk=task.id %}">Update</a>
 <a>Done</a>
