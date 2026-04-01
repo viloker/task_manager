@@ -11,9 +11,15 @@
   </button>
 
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" href="#">Completed</a></li>
-    <li><a class="dropdown-item" href="#">Not completed</a></li>
-    <li><a class="dropdown-item" href="{% url 'task:task-list' %}">All tasks</a></li>
+    <li>
+      <a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=True">Completed</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=False">Not completed</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{% url 'task:task-list' %}">All tasks</a>
+    </li>
 
     <li><hr class="dropdown-divider"></li>
     {% for label, value in priority_list %}
@@ -41,7 +47,7 @@
 </div>
 {% empty %}
 
-<h3>We don't have any tasks.</h3>
+<h3>Doesn't have any tasks.</h3>
 {% endfor%}
 
 {% endblock %}

@@ -79,6 +79,7 @@ class TaskListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         name = self.request.GET.get("name")
         priority = self.request.GET.get("priority", None)
+        is_completed = self.request.GET.get("is_completed", None)
 
         queryset = super().get_queryset()
 
@@ -87,6 +88,9 @@ class TaskListView(LoginRequiredMixin, ListView):
 
         if priority:
             queryset = queryset.filter(priority=priority)
+
+        if is_completed:
+            queryset = queryset.filter(is_completed=is_completed)
 
         return queryset
 
