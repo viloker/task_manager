@@ -133,12 +133,14 @@ class WorkerListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
+        queryset = self.model.objects.select_related("position")
+
         username = self.request.GET.get("username")
 
         if username:
-            return self.model.objects.filter(username__icontains=username)
+            return queryset.filter(username__icontains=username)
 
-        return super().get_queryset()
+        return queryset
 
 
 class WorkerDetailView(LoginRequiredMixin, DetailView):
