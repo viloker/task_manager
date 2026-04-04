@@ -1,0 +1,27 @@
+<style>
+    :root {
+        --bg-color: #f8f9fa;
+        --sidebar-color: #ffffff;
+        --accent-color: #4e73df;
+        --text-main: #3a3b45;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: 'Inter', sans-serif;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    }
+
+    .btn-primary {
+        background-color: var(--accent-color);
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+    }
+</style>
