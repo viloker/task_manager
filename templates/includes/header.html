@@ -1,43 +1,31 @@
-<header class="navbar navbar-expand-lg custom-header sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand logo-text" href="{% url 'task:index' %}">
-      <span class="logo-icon">✔</span> Task<span>Manager</span>
-    </a>
+<header class="navbar">
+  <div class="navbar-container">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand" href="{% url 'task:index' %}">Task Manager</a>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link nav-custom-link" href="{% url 'task:my-task' %}">My Tasks</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-custom-link" href="{% url 'task:task-list' %}">All Tasks</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-custom-link" href="{% url 'task:worker-list' %}">Workers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-custom-link" href="{% url 'task:position-list' %}">Positions</a>
-        </li>
-      </ul>
+    <nav class="navbar-nav">
+      <a class="nav-link" href="{% url 'task:my-task' %}">My Tasks</a>
+      <a class="nav-link" href="{% url 'task:task-list' %}">All Tasks</a>
+      <a class="nav-link" href="{% url 'task:worker-list' %}">Workers</a>
+      <a class="nav-link" href="{% url 'task:position-list' %}">Positions</a>
+    </nav>
 
-      <div class="d-flex align-items-center gap-3">
-        {% if search %}
-        <form method="get" class="search-form-custom">
-          <div class="input-group input-group-sm">
-             {{ search.field }} <button class="btn btn-search" type="submit">Search</button>
-          </div>
-        </form>
-        {% endif %}
-
-        <form method="post" action="{% url 'logout' %}?next={{request.path}}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-logout">Logout</button>
-        </form>
-      </div>
+    {% if search %}
+    <div class="navbar-search">
+      <form method="get">
+        {{ search.as_p }}
+        <input type="submit" value="Search">
+      </form>
     </div>
+    {% endif %}
+
+    <div class="navbar-end">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"></button>
+      <form class="logout-form" method="post" action="{% url 'logout' %}?next={{request.path}}">
+        {% csrf_token %}
+        <button type="submit" class="btn-logout">Logout</button>
+      </form>
+    </div>
+
   </div>
 </header>
