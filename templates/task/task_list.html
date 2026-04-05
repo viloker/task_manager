@@ -1,53 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-<h1>Tasks</h1>
-</div>
+<div class="page">
 
-<div class="dropdown mb-3">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-    Filters
-  </button>
+  <div class="page-header">
+    <h1 class="page-title">All Tasks</h1>
+    <a class="btn btn-primary" href="{% url 'task:task-create' %}">+ New task</a>
+  </div>
 
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li>
-      <a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=True">Completed</a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=False">Not completed</a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="{% url 'task:task-list' %}">All tasks</a>
-    </li>
+  <div class="filter-bar">
+    <div class="dropdown">
+      <button class="dropdown-trigger" type="button">Filters</button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=True">Completed</a></li>
+        <li><a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=False">Not completed</a></li>
+        <li><a class="dropdown-item" href="{% url 'task:task-list' %}">All tasks</a></li>
+        <li><div class="dropdown-divider"></div></li>
+        {% for label, value in priority_list %}
+        <li>
+          <a class="dropdown-item" href="{% url 'task:task-list' %}?priority={{ label }}">{{ label }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 
-    <li><hr class="dropdown-divider"></li>
-    {% for label, value in priority_list %}
-      <li>
-        <a class="dropdown-item"
-           href="{% url 'task:task-list' %}?priority={{ label }}">
-          {{ label }}
-        </a>
-      </li>
+  <div class="task-list">
+    {% for task in task_list %}
+    <div class="task-item">
+      <a class="task-item__name" href="{% url 'task:task-detail' pk=task.id %}">{{ task.name }}</a>
+      <span class="badge {% if task.is_completed %}badge-success{% else %}badge-neutral{% endif %} task-item__status">
+        {% if task.is_completed %}Done{% else %}Open{% endif %}
+      </span>
+      <span class="badge badge-primary task-item__priority">{{ task.priority }}</span>
+      <span class="task-item__deadline">{{ task.deadline }}</span>
+    </div>
+    {% empty %}
+    <div class="empty-state"><h3>No tasks found.</h3></div>
     {% endfor %}
-  </ul>
-</div>
+  </div>
 
-<div>
-   <a href="{% url 'task:task-create' %}">New task</a>
 </div>
-{% for task in task_list %}
-<div>
-  <a href="{% url 'task:task-detail' pk=task.id %}">
-    <p>{{ task.name }}</p>
-  </a>
-    <p>{{ task.is_completed }}</p>
-    <p>{{ task.priority }}</p>
-    <p>{{ task.deadline }}</p>
-</div>
-{% empty %}
-
-<h3>Doesn't have any tasks.</h3>
-{% endfor%}
-
 {% endblock %}

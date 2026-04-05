@@ -1,20 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Task detail</h2>
+<div class="page">
+  <div class="detail-card">
 
-<p>{{ task.name }}</p>
-<p>{{ task.description }}</p>
-<p>{{ task.deadline }}</p>
-<p>{{ task.is_completed }}</p>
-<p>{{ task.priority }}</p>
-<p>{{ task.task_type }}</p>
-<p>{{ task.assignees }}</p>
-{% for assignee in task.assignees.all %}
-  <p>{{ assignee.username }}</p>
-{% endfor %}
-<a href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
-<a href="{% url 'task:task-update' pk=task.id %}">Update</a>
-<a>Done</a>
+    <div class="detail-header">
+      <h2>{{ task.name }}</h2>
+      <div class="detail-meta">
+        <span class="badge {% if task.is_completed %}badge-success{% else %}badge-neutral{% endif %}">
+          {% if task.is_completed %}Done{% else %}Open{% endif %}
+        </span>
+        <span class="badge badge-primary">{{ task.priority }}</span>
+        <span class="badge badge-neutral">{{ task.task_type }}</span>
+      </div>
+    </div>
 
+    <div class="detail-body">
+      <div class="detail-field">
+        <span class="detail-label">Description</span>
+        <span class="detail-value">{{ task.description }}</span>
+      </div>
+      <div class="detail-field">
+        <span class="detail-label">Deadline</span>
+        <span class="detail-value">{{ task.deadline }}</span>
+      </div>
+      <div class="detail-field">
+        <span class="detail-label">Assignees</span>
+        <div class="assignee-list">
+          {% for assignee in task.assignees.all %}
+            <span class="assignee-chip">{{ assignee.username }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-actions">
+      <a class="btn btn-outline" href="{% url 'task:task-update' pk=task.id %}">Edit</a>
+      <a class="btn btn-danger-outline" href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
+      <a class="btn btn-success-outline">Mark done</a>
+    </div>
+
+  </div>
+</div>
 {% endblock %}
