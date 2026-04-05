@@ -17,7 +17,7 @@
         <span class="worker-detail__label">Tasks</span>
         <div class="worker-tasks">
           {% for task in worker.tasks.all %}
-            <span class="worker-task-chip">{{ task.name }}</span>
+            <a href="{% url 'task:task-detail' task.id %}" class="worker-task-chip">{{ task.name }}</a>
           {% empty %}
             <span class="worker-no-tasks">No active tasks.</span>
           {% endfor %}
