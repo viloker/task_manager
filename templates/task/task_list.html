@@ -15,7 +15,9 @@
         <li><a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=True">Completed</a></li>
         <li><a class="dropdown-item" href="{% url 'task:task-list' %}?is_completed=False">Not completed</a></li>
         <li><a class="dropdown-item" href="{% url 'task:task-list' %}">All tasks</a></li>
-        <li><div class="dropdown-divider"></div></li>
+        <li>
+          <div class="dropdown-divider"></div>
+        </li>
         {% for label, value in priority_list %}
         <li>
           <a class="dropdown-item" href="{% url 'task:task-list' %}?priority={{ label }}">{{ label }}</a>
@@ -29,9 +31,9 @@
     {% for task in task_list %}
     <div class="task-item">
       <a class="task-item__name" href="{% url 'task:task-detail' pk=task.id %}">{{ task.name }}</a>
-      <span class="badge {% if task.is_completed %}badge-success{% else %}badge-neutral{% endif %} task-item__status">
-        {% if task.is_completed %}Done{% else %}Open{% endif %}
-      </span>
+
+      {% include "includes/task_completed.html" %}
+
       <span class="badge badge-primary task-item__priority">{{ task.priority }}</span>
       <span class="task-item__deadline">{{ task.deadline }}</span>
     </div>
