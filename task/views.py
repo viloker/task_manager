@@ -175,7 +175,7 @@ class WorkerUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class WorkerDeleteView(LoginRequiredMixin, DeleteView):
-    model = Task
+    model = Worker
     success_url = reverse_lazy("task:task-list")
     template_name = "task/worker_delete.html"
 
