@@ -1,21 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="page">
 
-<h1>My tasks:</h1>
+  <div class="page-header">
+    <h1 class="page-title">My Tasks</h1>
+  </div>
 
-{% for task in task_list %}
-<div>
-  <a href="{% url 'task:task-detail' pk=task.id %}">
-    <p>{{ task.name }}</p>
-  </a>
-    <p>{{ task.is_completed }}</p>
-    <p>{{ task.priority }}</p>
-    <p>{{ task.deadline }}</p>
+  <div class="task-list">
+    {% for task in task_list %}
+    <div class="task-item">
+      <a class="task-item__name" href="{% url 'task:task-detail' pk=task.id %}">{{ task.name }}</a>
+      <span class="badge {% if task.is_completed %}badge-success{% else %}badge-neutral{% endif %} task-item__status">
+        {% if task.is_completed %}Done{% else %}Open{% endif %}
+      </span>
+      <span class="badge badge-primary task-item__priority">{{ task.priority }}</span>
+      <span class="task-item__deadline">{{ task.deadline }}</span>
+    </div>
+    {% empty %}
+    <div class="empty-state"><h3>You don't have any tasks yet.</h3></div>
+    {% endfor %}
+  </div>
+
 </div>
-{% empty %}
-
-<h3>You don't have any tasks yet.</h3>
-{% endfor%}
-
 {% endblock %}
