@@ -110,6 +110,13 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 
     queryset = Task.objects.select_related("task_type").prefetch_related("assignees")
 
+    def post(self, *args, **kwargs):
+        pk = kwargs.get("pk")
+        task = self.model.objects.get(pk=pk)
+        task.is_completed = True
+        task.save()
+        return super().get(*args, *kwargs)
+
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task

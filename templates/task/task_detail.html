@@ -7,9 +7,7 @@
     <div class="detail-header">
       <h2>{{ task.name }}</h2>
       <div class="detail-meta">
-        <span class="badge {% if task.is_completed %}badge-success{% else %}badge-neutral{% endif %}">
-          {% if task.is_completed %}Done{% else %}Open{% endif %}
-        </span>
+        {% include "includes/task_completed.html" %}
         <span class="badge badge-primary">{{ task.priority }}</span>
         <span class="badge badge-neutral">{{ task.task_type }}</span>
       </div>
@@ -37,7 +35,10 @@
     <div class="detail-actions">
       <a class="btn btn-outline" href="{% url 'task:task-update' pk=task.id %}">Edit</a>
       <a class="btn btn-danger-outline" href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
-      <a class="btn btn-success-outline">Mark done</a>
+      <form class="btn-success-outline" method="post">
+        {% csrf_token %}
+        <input class="btn btn-success-outline" type="submit" value="Ready">
+      </form>
     </div>
 
   </div>
