@@ -1,0 +1,49 @@
+/* ============================================================
+   PAGINATION — includes/pagination.html
+   ============================================================ */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2rem 2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-item { list-style: none; }
+
+.page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+
+.page-link:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-subtle);
+}
+
+.page-item.active .page-link {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+.page-item.active .page-link:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+}
