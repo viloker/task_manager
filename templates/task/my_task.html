@@ -11,9 +11,13 @@
     {% for task in task_list %}
     <div class="task-item">
       <a class="task-item__name" href="{% url 'task:task-detail' pk=task.id %}">{{ task.name }}</a>
-      <span class="badge {% if task.is_completed %}badge-success{% else %}badge-neutral{% endif %} task-item__status">
-        {% if task.is_completed %}Done{% else %}Open{% endif %}
-      </span>
+
+      {% if task.is_completed %}
+        <span class="badge badge-success task-item__status">Completed</span>
+      {% else %}
+        <span class="badge badge-neutral task-item__status">Not completed</span>
+      {% endif %}
+
       <span class="badge badge-primary task-item__priority">{{ task.priority }}</span>
       <span class="task-item__deadline">{{ task.deadline }}</span>
     </div>
