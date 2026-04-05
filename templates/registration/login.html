@@ -1,21 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if form.errors %}
-<p>Your username or password is not correct</p>
-{% endif %}
+<div class="auth-page">
+  <div class="auth-card">
 
-<h1>Login</h1>
+    <div class="auth-card__logo">
+      <div class="auth-card__logo-dot"></div>
+      <span class="auth-card__logo-text">Task Manager</span>
+    </div>
 
-{% if next %}
-<p>Please login to see this page.</p>
-{% endif %}
+    {% if form.errors %}
+    <div class="auth-error">Your username or password is incorrect.</div>
+    {% endif %}
 
+    <h1>Sign in</h1>
+    {% if next %}
+    <p class="auth-info">Please log in to view this page.</p>
+    {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Log in">
-  <input type="hidden" name="next" value="{{ next }}">
-</form>
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Sign in">
+      <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+  </div>
+</div>
 {% endblock %}
