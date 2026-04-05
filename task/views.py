@@ -49,15 +49,27 @@ class MyTaskListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         context["search"] = TaskSearchForm(self.request.GET, None)
+        context["priority_list"] = Task.PRIORITY_CHOICE_LIST
 
         return context
 
     def get_queryset(self):
         user = self.request.user
-        queryset = self.model.objects.filter(assignees=user)
+
         name = self.request.GET.get("name")
+        is_completed = self.request.GET.get("is_completed", None)
+        priority = self.request.GET.get("priority", None)
+
+        queryset = self.model.objects.filter(assignees=user)
+
         if name:
             queryset = queryset.filter(name__icontains=name)
+
+        if is_completed:
+            queryset = queryset.filter(is_completed=is_completed)
+
+        if priority:
+            queryset = queryset.filter(priority=priority)
 
         return queryset
 
@@ -72,7 +84,6 @@ class TaskListView(LoginRequiredMixin, ListView):
 
         context["search"] = TaskSearchForm(self.request.GET, None)
         context["priority_list"] = Task.PRIORITY_CHOICE_LIST
-        print(self.request.GET)
         return context
 
     def get_queryset(self):
