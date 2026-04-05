@@ -1,33 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="page">
 
-<div>
-  <h1>Task manager</h1>
-</div>
+  <div class="page-hero">
+    <h1 class="page-title">Dashboard</h1>
+  </div>
 
-<div>
-  <ul>
-    <li>All tasks: {{num_tasks}}+</li>
-    <li>Completed tasks: {{num_done_tasks}}+</li>
-    <li>Workers: {{num_workers}}</li>
-  </ul>
-  <span>Urgent tasks: {{num_urgent_tasks}}</span>
-</div>
+  <div class="stats-grid">
+    <div class="stat-card stat-card--total">
+      All tasks: {{num_tasks}}+
+    </div>
+    <div class="stat-card stat-card--done">
+      Completed tasks: {{num_done_tasks}}+
+    </div>
+    <div class="stat-card stat-card--workers">
+      Workers: {{num_workers}}
+    </div>
+  </div>
 
-<div>
-  <h2>Last completed tasks:</h2>
-  <ul>
-  {% for task in last_completed_tasks %}
-    <li>
-      <a href="{% url 'task:task-detail' pk=task.pk">{{task.name}}</a>
-      <p>{{task.description}}</p>
-      <span>{{task.deadline}}</span>
-    </li>
+  <span class="urgent-badge">Urgent tasks: {{num_urgent_tasks}}</span>
 
-  {% empty %}
-  </ul>
-  <p>We don't have completed task.</p>
-  {% endfor %}
+  <div class="section">
+    <h2 class="section-title">Last completed tasks</h2>
+    <ul class="task-list task-list--recent">
+    {% for task in last_completed_tasks %}
+      <li class="task-item task-item--recent">
+        <a class="task-item__name" href="{% url 'task:task-detail' pk=task.pk %}">{{task.name}}</a>
+        <p class="task-item__desc">{{task.description}}</p>
+        <span class="task-item__date">{{task.deadline}}</span>
+      </li>
+    {% empty %}
+    </ul>
+    <p class="empty-state">No completed tasks yet.</p>
+    {% endfor %}
+  </div>
+
 </div>
 {% endblock %}
