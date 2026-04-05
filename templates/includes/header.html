@@ -14,6 +14,13 @@
     <div class="navbar-search">
       <form method="get">
         {{ search.as_p }}
+
+        {% for key, value in request.GET.items %}
+          {% if key != 'search' and key != 'page' %}
+            <input type="hidden" name="{{ key }}" value="{{ value }}">
+          {% endif %}
+        {% endfor %}
+
         <input type="submit" value="Search">
       </form>
     </div>
