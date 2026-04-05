@@ -1,20 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Worker list</h2>
-{% for worker in worker_list %}
-  <ul>
-    <li>{{ worker.username }} ({{worker.first_name}} {{worker.last_name}})</li>
-    <li>Position: {{worker.position}}</li>
-    <li>
-      <a href="{% url 'task:worker-detail' pk=worker.id %}">See all information</a>
-    </li>
-  </ul>
+<div class="page">
 
-{% empty %}
-<h4>We don't have any workers.</h4>
-{% endfor %}
+  <div class="page-header">
+    <h1 class="page-title">Workers</h1>
+    <a class="btn btn-primary" href="{% url 'task:worker-create' %}">+ New worker</a>
+  </div>
 
-<a href="{% url 'task:worker-create' %}">Create new worker</a>
+  <div class="worker-grid">
+    {% for worker in worker_list %}
+    <div class="worker-card">
+      <span class="worker-card__username">{{ worker.username }}</span>
+      <span class="worker-card__position">{{ worker.position }}</span>
+      <a class="worker-card__link" href="{% url 'task:worker-detail' pk=worker.id %}">View profile</a>
+    </div>
+    {% empty %}
+    <div class="worker-empty empty-state"><h3>No workers yet.</h3></div>
+    {% endfor %}
+  </div>
 
+</div>
 {% endblock %}

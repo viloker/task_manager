@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{object|yesno:"Update,Create"}} worker</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="Submit" value="Created worker">
-</form>
-
+<div class="form-page">
+  <div class="form-card">
+    <h1>{{object|yesno:"Update,Create"}} worker</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Save worker">
+    </form>
+  </div>
+</div>
 {% endblock %}

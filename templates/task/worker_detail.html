@@ -1,19 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="page">
+  <div class="worker-detail">
 
-<h2>Worker: {{worker.username}}</h2>
+    <div class="worker-detail__header">
+      <div>
+        <h2 class="worker-detail__title">{{ worker.username }}</h2>
+        <p class="worker-detail__subtitle">{{ worker.first_name }} {{ worker.last_name }}</p>
+      </div>
+      <span class="badge badge-primary">{{ worker.position }}</span>
+    </div>
 
-<p>Full name: {{worker.first_name}} {{worker.last_name}}</p>
-<p>Position: {{worker.position}}</p>
-<p>Tasks:</p>
-{% for task in worker.tasks.all %}
-  <p>{{task.name}}</p>
-{% empty %}
-  <p>{{worker.username}} don't have any activity tasks.</p>
-{% endfor %}
+    <div class="worker-detail__body">
+      <div class="worker-detail__field">
+        <span class="worker-detail__label">Tasks</span>
+        <div class="worker-tasks">
+          {% for task in worker.tasks.all %}
+            <span class="worker-task-chip">{{ task.name }}</span>
+          {% empty %}
+            <span class="worker-no-tasks">No active tasks.</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
 
-<a href="{% url 'task:worker-update' pk=worker.id %}">Update data</a>
-<a href="{% url 'task:worker-delete' pk=worker.id %}">Delete {{worker.username}}</a>
+    <div class="worker-detail__actions">
+      <a class="btn btn-outline" href="{% url 'task:worker-update' pk=worker.id %}">Edit</a>
+      <a class="btn btn-danger-outline" href="{% url 'task:worker-delete' pk=worker.id %}">Delete</a>
+    </div>
 
+  </div>
+</div>
 {% endblock %}
