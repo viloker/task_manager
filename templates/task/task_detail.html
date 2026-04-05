@@ -35,10 +35,17 @@
     <div class="detail-actions">
       <a class="btn btn-outline" href="{% url 'task:task-update' pk=task.id %}">Edit</a>
       <a class="btn btn-danger-outline" href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
+
+      {% if task.is_completed %}
+      <p class="btn btn-disabled">Ready</p>
+      {% else %}
       <form class="btn-success-outline" method="post">
         {% csrf_token %}
         <input class="btn btn-success-outline" type="submit" value="Ready">
       </form>
+      {% endif %}
+
+
     </div>
 
   </div>

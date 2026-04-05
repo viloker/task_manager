@@ -214,6 +214,14 @@ h4 { font-size: 0.9375rem; font-weight: 600; }
   background: var(--success-subtle);
 }
 
+.btn-disabled {
+  background: transparent;
+  color: var(--text-2);
+  border-color: var(--border-strong);
+}
+.btn-disabled:hover {
+  cursor: auto;
+}
 /* ---- Badges ---- */
 .badge {
   display: inline-flex;
