@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Delete task: "{{position.name}}"?</h1>
-<form method="post">
-  {% csrf_token %}
-  <input type="submit" value="Yes">
-  <a href="{% url 'task:position-list' %}">No</a>
-</form>
+<div class="form-page">
+  <div class="delete-card">
+    <h1>Delete position <span class="delete-target">"{{position.name}}"</span>?</h1>
+    <p class="delete-hint">This action cannot be undone.</p>
+    <div class="delete-actions">
+      <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Yes, delete">
+      </form>
+      <a class="btn-cancel" href="{% url 'task:position-list' %}">Cancel</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

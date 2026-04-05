@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% for position in count_workers %}
-<p>{{position.name}}, workers: {{position.count_workers}}</p>
-<a href="{% url 'task:position-delete' pk=position.id %}">Delete {{position.name}}</a>
-{% endfor %}
+<div class="page">
 
-<a href="{% url 'task:position-create' %}">Create new position</a>
+  <div class="page-header">
+    <h1 class="page-title">Positions</h1>
+    <a class="btn btn-primary" href="{% url 'task:position-create' %}">+ New position</a>
+  </div>
+
+  <div class="position-list">
+    {% for position in count_workers %}
+    <div class="position-row">
+      <div class="position-row__info">
+        <span class="position-row__name">{{ position.name }}</span>
+        <span class="position-row__count">{{ position.count_workers }} workers</span>
+      </div>
+      <a class="position-row__delete" href="{% url 'task:position-delete' pk=position.id %}">Delete</a>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
 {% endblock %}

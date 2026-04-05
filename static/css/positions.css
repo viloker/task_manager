@@ -1,0 +1,62 @@
+/* ============================================================
+   POSITIONS — position_list.html
+   ============================================================ */
+
+.position-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.position-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: border-color var(--transition);
+}
+
+.position-row:hover { border-color: var(--border-strong); }
+
+.position-row__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.position-row__name {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.position-row__count {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--text-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 2px 9px;
+}
+
+.position-row__delete {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-3);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.position-row__delete:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-subtle);
+}
