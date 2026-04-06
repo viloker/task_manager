@@ -7,6 +7,11 @@ from .models import Task, Worker
 
 
 class TaskForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["assignees"].queryset = Worker.objects.select_related("position")
+
     deadline = forms.DateField(widget=forms.SelectDateWidget)
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),

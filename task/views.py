@@ -139,6 +139,16 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     form_class = TaskForm
     template_name = "task/task_create.html"
 
+    def get_queryset(self):
+        return self.model.objects.select_related("task_type").prefetch_related("assignees")
+
+    def get_object(self, queryset=None):
+        if not hasattr(self, "_object"):
+            pk = self.kwargs.get("pk")
+            self._object = self.get_queryset().get(id=pk)
+
+        return self._object
+
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
