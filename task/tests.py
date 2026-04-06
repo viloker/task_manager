@@ -76,6 +76,23 @@ class ModelTests(TestCase):
 
         self.assertEqual(list(worker_1.tasks.all()), [task])
 
+    def test_task_delete_task_type(self):
+        task_type = TaskType.objects.create(name="name")
+
+        task = Task.objects.create(
+            name="new_task",
+            description="some description",
+            deadline="2020-11-04",
+            is_completed=True,
+            priority="urgent",
+            task_type=task_type
+        )
+
+        self.assertEqual(task.task_type, task_type)
+        task_type.delete()
+        task.refresh_from_db()
+        self.assertIsNone(task.task_type)
+
     def test_Worker_str(self):
         worker = get_user_model().objects.create_user(
             username="username",
