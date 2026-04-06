@@ -59,6 +59,7 @@ class MyTaskListView(LoginRequiredMixin, ListView):
         name = self.request.GET.get("name")
         is_completed = self.request.GET.get("is_completed", None)
         priority = self.request.GET.get("priority", None)
+        sort = self.request.GET.get("sort", None)
 
         queryset = self.model.objects.filter(assignees=user)
 
@@ -70,6 +71,9 @@ class MyTaskListView(LoginRequiredMixin, ListView):
 
         if priority:
             queryset = queryset.filter(priority=priority)
+
+        if sort:
+            queryset = queryset.order_by(sort)
 
         return queryset
 
@@ -90,6 +94,7 @@ class TaskListView(LoginRequiredMixin, ListView):
         name = self.request.GET.get("name")
         priority = self.request.GET.get("priority", None)
         is_completed = self.request.GET.get("is_completed", None)
+        sort = self.request.GET.get("sort", None)
 
         queryset = super().get_queryset()
 
@@ -101,6 +106,9 @@ class TaskListView(LoginRequiredMixin, ListView):
 
         if is_completed:
             queryset = queryset.filter(is_completed=is_completed)
+
+        if sort:
+            queryset = queryset.order_by(sort)
 
         return queryset
 

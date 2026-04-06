@@ -10,6 +10,7 @@
       <li>
         <div class="dropdown-divider"></div>
       </li>
+
       <li>
         <a class="dropdown-item" href="?{% query_transform request is_completed=True %}">Completed</a>
       </li>
@@ -19,11 +20,21 @@
       <li>
         <div class="dropdown-divider"></div>
       </li>
+
       {% for label, value in priority_list %}
       <li>
         <a class="dropdown-item" href="?{% query_transform request priority=label %}">{{ label }}</a>
       </li>
       {% endfor %}
+      <li>
+        <div class="dropdown-divider"></div>
+      </li>
+      <li>
+        <a class="dropdown-item" href="?{% query_transform request sort='deadline' %}">Soonest</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="?{% query_transform request sort='-deadline' %}">Latest</a>
+      </li>
     </ul>
   </div>
 </div>
