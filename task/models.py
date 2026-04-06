@@ -34,7 +34,7 @@ class Worker(AbstractUser):
     position = models.ForeignKey(
         "Position",
         related_name="workers",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True
     )
 
@@ -43,7 +43,7 @@ class Worker(AbstractUser):
 
 
 class Position(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
 
     def __str__(self) -> str:
         return f"{self.name}"
