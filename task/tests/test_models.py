@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from django.contrib.auth import get_user_model
 
-from .models import TaskType, Task, Position
+from task.models import TaskType, Task, Position
 
 
 class ModelTests(TestCase):
