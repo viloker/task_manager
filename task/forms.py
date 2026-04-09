@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
-from .models import Task, Worker
+from task.models import Task, Worker
 
 
 class TaskForm(forms.ModelForm):

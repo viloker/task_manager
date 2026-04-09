@@ -12,8 +12,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 from django.db.models import Count
-from .models import Task, Worker, Position
-from .forms import TaskForm, WorkerForm, TaskSearchForm, WorkerSearchForm, PositionSearchForm
+from task.models import Task, Worker, Position
+from task.forms import TaskForm, WorkerForm, TaskSearchForm, WorkerSearchForm, PositionSearchForm
 
 
 @login_required
