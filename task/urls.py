@@ -1,7 +1,7 @@
 from django.urls import path
 
 from task.views import (
-    index,
+    IndexView,
     MyTaskListView,
     TaskListView,
     TaskDetailView,
@@ -18,7 +18,7 @@ from task.views import (
     PositionDeleteView)
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", IndexView.as_view(), name="index"),
     path("my-tasks/", MyTaskListView.as_view(), name="my-task"),
     path("tasks/", TaskListView.as_view(), name="task-list"),
     path("tasks/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),

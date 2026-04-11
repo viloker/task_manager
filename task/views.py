@@ -1,5 +1,6 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.views import View
 from django.views.generic import (
     ListView,
     CreateView,
@@ -16,28 +17,28 @@ from task.models import Task, Worker, Position
 from task.forms import TaskForm, WorkerForm, TaskSearchForm, WorkerSearchForm, PositionSearchForm
 
 
-@login_required
-def index(request):
-    num_tasks = Task.objects.count()
-    num_done_tasks = Task.objects.filter(is_completed=True).count()
-    num_workers = Worker.objects.count()
+class IndexView(LoginRequiredMixin, View):
+    def get(self, request):
+        num_tasks = Task.objects.count()
+        num_done_tasks = Task.objects.filter(is_completed=True).count()
+        num_workers = Worker.objects.count()
 
-    num_urgent_tasks = Task.objects.filter(priority="Urgent", is_completed=False).count()
+        num_urgent_tasks = Task.objects.filter(priority="Urgent", is_completed=False).count()
 
-    last_completed_tasks = Task.objects.filter(is_completed=True).order_by("-deadline")[:5]
+        last_completed_tasks = Task.objects.filter(is_completed=True).order_by("-deadline")[:5]
 
-    context = {
-        "num_tasks": num_tasks,
-        "num_done_tasks": num_done_tasks,
-        "num_workers": num_workers,
-        "num_urgent_tasks": num_urgent_tasks,
-        "last_completed_tasks": last_completed_tasks
-    }
+        context = {
+            "num_tasks": num_tasks,
+            "num_done_tasks": num_done_tasks,
+            "num_workers": num_workers,
+            "num_urgent_tasks": num_urgent_tasks,
+            "last_completed_tasks": last_completed_tasks
+        }
 
-    return render(
-        request,
-        "task/index.html",
-        context=context)
+        return render(
+            request,
+            "task/index.html",
+            context=context)
 
 
 class MyTaskListView(LoginRequiredMixin, ListView):
