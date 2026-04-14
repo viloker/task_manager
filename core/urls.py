@@ -16,8 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from core.settings import DEBUG
+from django.conf import settings
 
 from debug_toolbar.toolbar import debug_toolbar_urls
 
@@ -27,5 +26,5 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
 ]
 
-if DEBUG:
+if settings.DEBUG:
     urlpatterns += debug_toolbar_urls()
