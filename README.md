@@ -2,6 +2,8 @@
 
 A powerful and intuitive Django-based web application designed to streamline team collaboration, track tasks, and manage employee workloads efficiently.
 
+**🔗 [Live Demo](https://task-manager-bs8h.onrender.com)**
+
 ## 🖼 Project Preview
 
 |           Dark Theme Dashboard            |            Light Theme Dashboard            |
@@ -22,15 +24,23 @@ A powerful and intuitive Django-based web application designed to streamline tea
 ## 🛠 Tech Stack
 
 * **Framework:** Django 5.x
-* **Database:** SQLite (Development)
+* **Database:** SQLite (Development) / PostgreSQL (Production)
 * **Styling:** Custom CSS with CSS Variables
 * **Tools:** Django Debug Toolbar
+* **Hosting:** Render
+
+## 🔗 Deployment
+
+The project is deployed and available at:
+👉 **[https://task-manager-bs8h.onrender.com](https://task-manager-bs8h.onrender.com)**
+
+---
 
 ## 📦 Installation
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/viloker/task_manager.git
+    git clone [https://github.com/viloker/task_manager.git](https://github.com/viloker/task_manager.git)
     ```
     ```bash
     cd task_manager
